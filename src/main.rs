@@ -1,7 +1,15 @@
-use std::{collections::HashMap, fs::File, io::{BufRead, BufReader}};
+use std::{env, collections::HashMap, fs::File, io::{BufRead, BufReader}};
 
 fn main() {
-    let data_file = File::open("data/data2.txt").expect("Error opening data file!");
+    let args: Vec<String> = env::args().collect();
+
+    if args.len() < 2 {
+        panic!("You need to provide path to data file to parse!");
+    }
+
+    let file_path = &args[1];
+
+    let data_file = File::open(file_path).expect("Error opening data file!");
 
     let mut words: HashMap<String, i32> = HashMap::new();
 
@@ -31,5 +39,8 @@ fn main() {
         }
     }
 
-    println!("The most frequent word is {}. The data file contains it {} times", max_entry.0, max_entry.1);
+    println!(
+        "The most frequent word is {}. The data file contains it {} times",
+        max_entry.0, max_entry.1
+    );
 }
