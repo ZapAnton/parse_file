@@ -22,4 +22,14 @@ fn main() {
             *word_count += 1;
         }
     }
+
+    let mut max_entry = ("", 0);
+
+    for (key, value) in &words {
+        if value > &max_entry.1 {
+            max_entry = (key, *value);
+        }
+    }
+
+    println!("The most frequent word is {}. The data file contains it {} times", max_entry.0, max_entry.1);
 }
