@@ -1,0 +1,5 @@
+*.swp
+*.rustfmt
+/target
+**/*.rs.bk
+data/
