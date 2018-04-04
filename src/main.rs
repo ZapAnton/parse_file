@@ -1,4 +1,4 @@
-use std::{env, collections::HashMap, fs::File, io::{BufRead, BufReader}};
+use std::{env, collections::HashMap, fs::File, io::{BufRead, BufReader}, time::Instant};
 
 fn read_words_from_file(data_file: &File) -> HashMap<String, i32> {
     let mut words: HashMap<String, i32> = HashMap::new();
@@ -43,6 +43,8 @@ fn get_parse_file_name() -> String {
 }
 
 fn main() {
+    let start_time = Instant::now();
+
     let file_path = get_parse_file_name();
 
     let data_file = File::open(file_path).expect("Error opening data file!");
@@ -52,7 +54,7 @@ fn main() {
     let max_entry = find_most_frequent_word(&words);
 
     println!(
-        "The most frequent word is '{}'. The data file contains it {} times",
-        max_entry.0, max_entry.1
+        "The most frequent word is '{}'. The data file contains it {} times.\nProgramm work time: {} seconds",
+        max_entry.0, max_entry.1, start_time.elapsed().as_secs()
     );
 }
